@@ -1,23 +1,205 @@
-$(function() {
-  var flame = $('#flame');
-  var txt = $('h1');
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  flame.on({
-    click: function() {
-      flame.removeClass('burn').addClass('puff');
-      $('.smoke').each(function() {
-        $(this).addClass('puff-bubble');
-      });
-      $('#glow').remove();
-      txt.hide().html("It <b>will</b> come true..").delay(750).fadeIn(300);
-      $('#candle').animate({
-        'opacity': '.5'
-      }, 100);
-    }
-  });
-});
+body {
+  background-color: #1e1934;
+  font-family: 'Sacramento', sans-serif;
+  text-align: center;
+}
 
+h1 {
+  position: fixed;
+  margin: 0 auto;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  font-size: 2em;
+  letter-spacing: .1em;
+  color: white;
+  text-shadow: 0 0 20px black;
+  opacity: .8;
+}
 
+#glow {
+  position: absolute;
+  left: calc(50% - .1em);
+  bottom: 35%;
+  width: .2em;
+  height: .2em;
+  border-radius: 100%;
+  opacity: .15;
+}
+
+#candle {
+  position: absolute;
+  left: calc(50% - .75em);
+  bottom: 30%;
+  width: 1.5em;
+  height: 10em;
+  overflow: hidden;
+}
+
+#top {
+  position: absolute;
+  width: 100%;
+  height: 2em;
+  background-color: transparent;
+}
+
+#knot {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - .05em);
+  height: .5em;
+  width: .1em;
+  background-color: #0f3146;
+}
+
+.smoke {
+  position: absolute;
+  opacity: 0;
+  border-radius: 100%;
+}
+
+.smoke:nth-child(1) {
+  bottom: .1em;
+  left: calc(50% - .5em);
+  height: .5em;
+  width: .5em;
+  background-color: silver;
+}
+
+.smoke:nth-child(2) {
+  bottom: .6em;
+  left: 50%;
+  height: .6em;
+  width: .6em;
+  background-color: lightgray;
+  animation-delay: .2s;
+}
+
+.smoke:nth-child(3) {
+  bottom: 1.1em;
+  left: 20%;
+  height: .3em;
+  width: .3em;
+  background-color: whitesmoke;
+  animation-delay: .3s;
+}
+
+#flame {
+  position: absolute;
+  bottom: .15em;
+  width: 1.5em;
+  height: 1.6em;
+  background-color: #ffee86;
+  border-radius: 100%;
+  box-shadow: inset 0 0 0 .1em #ffee86;
+  cursor: pointer;
+  animation: burn 1.5s ease-in-out infinite;
+}
+
+#flame::after {
+  position: absolute;
+  content: '';
+  width: .7em;
+  height: .9em;
+  bottom: 10%;
+  left: calc(50% - .35em);
+  background-color: #ff3200;
+  border-radius: 100%;
+  animation: burnInner 1.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 1.5em 2.2em rgba(255, 246, 162, .75);
+  }
+  50% {
+    box-shadow: 0 0 1.5em 2em rgba(255, 246, 162, .6);
+  }
+  100% {
+    box-shadow: 0 0 1.5em 2.2em rgba(255, 246, 162, .75);
+  }
+}
+
+@keyframes burn {
+  0% {
+    height: 1.7em;
+    transform: rotateY(30deg);
+  }
+  50% {
+    height: 1.3em;
+    transform: rotateY(0deg);
+    opacity: .9;
+  }
+  100% {
+    height: 1.7em;
+    transform: rotateY(30deg);
+  }
+}
+
+@keyframes burnInner {
+  0% {
+    height: .9em;
+    transform: rotateX(0deg);
+  }
+  50% {
+    height: .8em;
+    transform: rotateX(30deg);
+  }
+  100% {
+    height: .9em;
+    transform: rotateX(0deg);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 1.5em;
+    bottom: 5%;
+  }
+
+  #candle {
+    width: 1em;
+    height: 8em;
+  }
+
+  #top {
+    height: 1.5em;
+  }
+
+  #flame {
+    width: 1.2em;
+    height: 1.4em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.2em;
+    bottom: 2%;
+  }
+
+  #candle {
+    width: .8em;
+    height: 6em;
+  }
+
+  #top {
+    height: 1.2em;
+  }
+
+  #flame {
+    width: 1em;
+    height: 1.2em;
+  }
+}
 
 
 
